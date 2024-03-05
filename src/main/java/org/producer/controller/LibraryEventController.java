@@ -7,13 +7,9 @@ import org.producer.domain.LibraryEvent;
 import org.producer.producer.LibraryEventProducer;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.kafka.support.SendResult;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
-import java.util.concurrent.CompletableFuture;
+import java.util.Collections;
 
 @Slf4j
 @RestController
@@ -32,5 +28,10 @@ public class LibraryEventController {
         }
 
         return ResponseEntity.status(HttpStatus.CREATED).body(libraryEvent);
+    }
+
+    @GetMapping("/v1/greeting-event/{name}")
+    public ResponseEntity<?> greeting(@PathVariable String name){
+        return ResponseEntity.ok(Collections.singletonMap("message",STR."Hello, \{name}!"));
     }
 }
